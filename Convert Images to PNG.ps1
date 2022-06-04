@@ -1,7 +1,7 @@
 Set-StrictMode -Version 3.0
 Get-ChildItem -File | Rename-Item -NewName { $_.name -replace "\.(jfif|jpeg)$", ".jpg" }
 # mogrify.exe will throw an error for any file types not found in the directory. As far as I can tell, these errors are benign.
-if(-not (Test-Path -Path $PSScriptRoot\ImageMagick\magick.exe -Pathtype Leaf)){ 
+if(-not (Test-Path -Path $PSScriptRoot\ImageMagick\magick.exe -Pathtype Leaf)){
 	New-Item $PSScriptRoot\ImageMagick -ItemType Directory | Out-Null
 	winget install -e --id ImageMagick.ImageMagick --location $PSScriptRoot\ImageMagick
 }
