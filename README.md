@@ -1,4 +1,4 @@
-# ImageConverter-PS1
+# PS-Image-Converter
 Convert images using ImageMagick. To the best of my knowledge, this will only function on Microsoft Windows.
 
 ## Installation
