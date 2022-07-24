@@ -4,6 +4,10 @@ Get-ChildItem -File | Rename-Item -NewName { $_.name -replace "\.(jfif|jpeg)$", 
 if( -not (Test-Path -Path $PSScriptRoot\ImageMagick\magick.exe -Pathtype Leaf)){
 	New-Item $PSScriptRoot\ImageMagick -ItemType Directory | Out-Null
 	winget install -e --id ImageMagick.ImageMagick --location $PSScriptRoot\ImageMagick
+	# This adds ImageMagick to PATH, since winget does not.
+	[Environment]::SetEnvironmentVariable('Path', $env:PATH + "$PSScriptRoot\ImageMagick",  'User')
+	# After adding ImageMagick to PATH, this refreshes the PATH without needing to restart PowerShell.
+	$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
 }
 if( -not (Test-Path -Path $PSScriptRoot\Input -Pathtype Leaf)){
 	New-Item $PSScriptRoot\Input -ItemType Directory | Out-Null
